@@ -58,6 +58,7 @@ public class BaseAction<T,S> extends ActionSupport implements ModelDriven<T> {
     public void sessionPut(String key,Object value){
         ActionContext.getContext().getSession().put(key, value);
     }
+
     public void applicationPut(String key,Object value){
         ActionContext.getContext().getApplication().put(key, value);
     }
@@ -71,7 +72,6 @@ public class BaseAction<T,S> extends ActionSupport implements ModelDriven<T> {
     public HttpServletResponse getResponse(){
         return ServletActionContext.getResponse();
     }
-
 
 
     public void setService(S service) {

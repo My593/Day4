@@ -9,5 +9,6 @@
 
     <include file="struts/Staff.xml"/>
     <include file="struts/Department.xml"/>
+    <include file="struts/Post.xml"/>
 
 </struts>

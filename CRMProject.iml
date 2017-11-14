@@ -23,6 +23,7 @@
             <file>file://$MODULE_DIR$/src/main/resources/struts.xml</file>
             <file>file://$MODULE_DIR$/src/main/resources/struts/Staff.xml</file>
             <file>file://$MODULE_DIR$/src/main/resources/struts/Department.xml</file>
+            <file>file://$MODULE_DIR$/src/main/resources/struts/Post.xml</file>
           </fileset>
           <propertiesKeys disabled="false" />
         </configuration>
@@ -43,6 +44,8 @@
         <fileset id="fileset" name="Spring Application Context" removed="false">
           <file>file://$MODULE_DIR$/src/main/resources/spring-config.xml</file>
           <file>file://$MODULE_DIR$/src/main/resources/spring/dept-config.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/spring/post-config.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/spring/spring-config.xml</file>
         </fileset>
       </configuration>
     </facet>

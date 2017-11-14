@@ -10,10 +10,9 @@
 
     </bean>
 
-    <bean id="departmentService" class="com.lanou.department.service.impl.DepartmentServiceImpl">
-        <property name="departmentDao" ref="departmentDao"/>
+    <bean id="postService" class="com.lanou.post.service.impl.PostServiceImpl">
+        <property name="postDao" ref="postDao"/>
     </bean>
-
 
 
 </beans>

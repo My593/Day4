@@ -1,8 +1,10 @@
 package com.lanou.post.service.impl;
 
+import com.lanou.post.dao.PostDao;
 import com.lanou.post.domain.Post;
 import com.lanou.post.service.PostService;
 
+import javax.annotation.Resource;
 import java.io.Serializable;
 import java.util.List;
 
@@ -11,14 +13,18 @@ import java.util.List;
  */
 public class PostServiceImpl implements PostService {
 
+    @Resource
+    private PostDao postDao;
     @Override
     public void save(Post post) {
+        postDao.save(post);
 
     }
 
     @Override
     public List<Post> findAll() {
-        return null;
+       return postDao.findAll();
+
     }
 
     @Override
@@ -38,7 +44,8 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public boolean saveOrUpdate(Post post) {
-        return false;
+        postDao.saveOrUpdate(post);
+        return true;
     }
 
     @Override
@@ -49,5 +56,13 @@ public class PostServiceImpl implements PostService {
     @Override
     public Post findById(Serializable id) {
         return null;
+    }
+
+    public PostDao getPostDao() {
+        return postDao;
+    }
+
+    public void setPostDao(PostDao postDao) {
+        this.postDao = postDao;
     }
 }

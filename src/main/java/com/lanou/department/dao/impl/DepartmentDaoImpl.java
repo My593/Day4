@@ -42,7 +42,7 @@ public class DepartmentDaoImpl extends HibernateDaoSupport implements Department
     @Override
     public boolean saveOrUpdate(Department department) {
         if (department.getDeptId().isEmpty()) {
-            getHibernateTemplate().save(department);
+                getHibernateTemplate().save(department);
         } else {
             getHibernateTemplate().saveOrUpdate(department);
         }

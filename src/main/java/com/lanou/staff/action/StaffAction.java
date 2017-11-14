@@ -45,15 +45,14 @@ public class StaffAction extends BaseAction<Staff, StaffServiceImpl> {
     }
 
 
-
-
-
-    public String saveOrUpdate() {
-        List<Staff> list = staffService.findAll();
-        staffService.saveOrUpdate(getModel());
+    public String addStaff(){
+        staffService.save(getModel());
         return SUCCESS;
-
     }
+
+
+
+
 
     public String getLoginName() {
         return loginName;

@@ -8,7 +8,7 @@
 
     <package name="find" extends="json-default" namespace="/dept">
 
-        <action name="findAllDept" class="com.lanou.department.action.DepartmentAction" method="findAllDepartment">
+        <action name="findAllDept" class="deptAction" method="findAllDepartment">
             <result name="success">/pages/department/listDepartment.jsp</result>
         </action>
 

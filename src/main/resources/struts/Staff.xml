@@ -15,5 +15,11 @@
                         <!--<result name="input">/pages/error.jsp</result>-->
                 </action>
 
+                <action name="addStaff" class="staffAction" method="addStaff">
+                        <result name="success" type="redirectAction">findAllStaff</result>
+                </action>
+
+
+
         </package>
 </struts>
