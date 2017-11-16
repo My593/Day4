@@ -49,10 +49,9 @@ FONT-SIZE: 12px; COLOR: #4b4b4b; LINE-HEIGHT: 18px; TEXT-DECORATION: none
 					<br/>
 
 					<br/>
-                    <font color="#ff0000">
-                        <s:fielderror fieldName="msg" theme="simple"/>
-                    </font>
+
 					用户名：<input type="text" name="loginName" class="msg" /><br/><br/>
+
 					<font color="#ff0000">
 						<s:fielderror fieldName="loginName" theme="simple"/>
 					</font>
@@ -63,6 +62,10 @@ FONT-SIZE: 12px; COLOR: #4b4b4b; LINE-HEIGHT: 18px; TEXT-DECORATION: none
 					</font>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<input type="submit" class="btn" value="登录 " />
+					<font color="#ff0000">
+						<s:fielderror fieldName="msg" theme="simple"/>
+						<%--<s:actionerror name="msg"/>--%>
+					</font>
 
 				</form>
 			</td>

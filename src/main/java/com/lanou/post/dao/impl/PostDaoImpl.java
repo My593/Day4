@@ -25,7 +25,7 @@ public class PostDaoImpl extends HibernateDaoSupport implements PostDao {
     @Override
     public boolean saveOrUpdate(Post post) {
 
-        if (post.getPostId().isEmpty()) {
+        if(post.getPostId().isEmpty()) {
             getHibernateTemplate().save(post);
         } else {
             getHibernateTemplate().saveOrUpdate(post);
@@ -34,6 +34,14 @@ public class PostDaoImpl extends HibernateDaoSupport implements PostDao {
 
 
         return true;
+    }
+
+    //根据部门id查职位
+    @Override
+    public List<Post> getPostByDeptId(String deptId) {
+        String sql = "from Post T_POST where dept.id=?";
+        List<Post> list = (List<Post>) getHibernateTemplate().find(sql, deptId);
+        return list;
     }
 
     @Override

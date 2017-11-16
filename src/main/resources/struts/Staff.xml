@@ -2,24 +2,58 @@
 <!DOCTYPE struts PUBLIC
         "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
         "http://struts.apache.org/dtds/struts-2.5.dtd">
-        <struts>
-        <package name="login" extends="json-default" namespace="/staff">
+<struts>
+    <package name="login" extends="json-default" namespace="/staff">
 
-                <action name="staffAction_login" class="staffAction" method="login">
-                        <result name="success">/pages/frame.jsp</result>
-                        <result name="input">/pages/login.jsp</result>
-                </action>
-
-                <action name="findAllStaff" class="staffAction" method="findAllStaff">
-                        <result name="success">/pages/staff/listStaff.jsp</result>
-                        <!--<result name="input">/pages/error.jsp</result>-->
-                </action>
-
-                <action name="addStaff" class="staffAction" method="addStaff">
-                        <result name="success" type="redirectAction">findAllStaff</result>
-                </action>
+        <action name="staffAction_login" class="staffAction" method="login">
+            <result name="success">/pages/frame.jsp</result>
+            <result name="input">/pages/login.jsp</result>
+        </action>
 
 
+        <action name="findAllStaff" class="staffAction" method="findAllStaff">
+            <result name="success" type="redirectAction">findDepartment</result>
+            <!--<result name="input">/pages/error.jsp</result>-->
+        </action>
 
-        </package>
+        <action name="findDepartment" class="com.lanou.department.action.DepartmentAction" method="findAllDepartment">
+            <result name="success">/pages/staff/listStaff.jsp</result>
+        </action>
+
+        <action name="findDept" class="deptAction" method="findAllDepartment">
+            <result name="success">/pages/staff/addStaff.jsp</result>
+        </action>
+
+        <action name="findDep" class="deptAction" method="findAllDep">
+            <result name="success">/pages/staff/editStaff.jsp</result>
+        </action>
+
+
+
+        <action name="addStaff" class="staffAction" method="addStaff">
+            <result name="success" type="redirectAction">findAllStaff</result>
+        </action>
+
+
+        <action name="editStaffPre" class="staffAction" method="editStaffPre">
+            <result name="success">/pages/staff/editStaff.jsp</result>
+        </action>
+
+        <action name="editStaff" class="staffAction" method="update">
+            <result name="success" type="redirectAction">findAllStaff</result>
+        </action>
+
+
+
+        <action name="staff_list" class="com.lanou.post.action.PostAction" method="getPostByDeptId">
+            <result name="success" type="json">
+                <param name="root">postList</param>
+                <param name="includeProperties">\[\d\]\.postName,\[\d\]\.postId</param>
+            </result>
+        </action>
+
+
+
+
+    </package>
 </struts>

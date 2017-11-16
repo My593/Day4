@@ -24,9 +24,11 @@ public class PostAction extends BaseAction<Post, PostService> {
 
     @Resource
     private DepartmentService departmentService;
-
     @Resource
     private PostService postService;
+
+    private List<Post> postList;
+    private String post_dept_id;
 
     // 查询所有
     public String findAllPost() {
@@ -41,7 +43,6 @@ public class PostAction extends BaseAction<Post, PostService> {
     }
 
     public String savePost() {
-
         postService.saveOrUpdate(getModel());
         return SUCCESS;
     }
@@ -50,6 +51,14 @@ public class PostAction extends BaseAction<Post, PostService> {
     public String update() {
         deptList = departmentService.findAll();
 //        postService.saveOrUpdate(getModel());
+        return SUCCESS;
+    }
+
+
+    public String getPostByDeptId() {
+        System.out.println("000000000000000000"+post_dept_id);
+
+        postList = postService.getPostByDeptId(post_dept_id);
         return SUCCESS;
     }
 
@@ -71,4 +80,19 @@ public class PostAction extends BaseAction<Post, PostService> {
     }
 
 
+    public String getPost_dept_id() {
+        return post_dept_id;
+    }
+
+    public void setPost_dept_id(String post_dept_id) {
+        this.post_dept_id = post_dept_id;
+    }
+
+    public List<Post> getPostList() {
+        return postList;
+    }
+
+    public void setPostList(List<Post> postList) {
+        this.postList = postList;
+    }
 }

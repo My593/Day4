@@ -6,7 +6,7 @@ import com.lanou.post.domain.Post;
  * Created by dllo on 17/11/9.
  */
 public class Staff {
-    private int staffId;
+    private String staffId;
     private String loginName,loginPwd,staffName,gender,onDutyDate;
     private Post post;
 
@@ -21,7 +21,7 @@ public class Staff {
         this.onDutyDate = onDutyDate;
     }
 
-    public Staff(int staffId, String loginName, String loginPwd, String staffName, String gender, String onDutyDate) {
+    public Staff(String staffId, String loginName, String loginPwd, String staffName, String gender, String onDutyDate) {
         this.staffId = staffId;
         this.loginName = loginName;
         this.loginPwd = loginPwd;
@@ -31,11 +31,11 @@ public class Staff {
     }
 
 
-    public int getStaffId() {
+    public String getStaffId() {
         return staffId;
     }
 
-    public void setStaffId(int staffId) {
+    public void setStaffId(String staffId) {
         this.staffId = staffId;
     }
 

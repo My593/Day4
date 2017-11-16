@@ -1,6 +1,9 @@
 package com.lanou.staff.action;
 
 import com.lanou.base.BaseAction;
+import com.lanou.department.domain.Department;
+import com.lanou.department.service.DepartmentService;
+import com.lanou.post.domain.Post;
 import com.lanou.staff.domain.Staff;
 import com.lanou.staff.service.StaffService;
 import com.lanou.staff.service.impl.StaffServiceImpl;
@@ -20,9 +23,19 @@ public class StaffAction extends BaseAction<Staff, StaffServiceImpl> {
     private String loginName, loginPwd;
     @Resource
     private StaffService staffService;
+    @Resource
+    private DepartmentService departmentService;
 
     private List<Staff> allList;
+
     private String staffId;
+
+    private List<Department> deptList;
+
+    private String crmPost_postId;
+    private Staff staff;
+    private Staff staffById;
+
 
 
     public String login() {
@@ -40,19 +53,45 @@ public class StaffAction extends BaseAction<Staff, StaffServiceImpl> {
 
     public String findAllStaff() {
         allList = staffService.findAll();
-        System.out.println(allList);
+        sessionPut("allList",allList);
+
         return SUCCESS;
     }
-
 
     public String addStaff(){
+
+        staff = getModel();
+        staff.setPost(new Post(crmPost_postId));
         staffService.save(getModel());
+        System.out.println(getModel());
+        return SUCCESS;
+    }
+
+    public String update(){
+
+        getModel().setPost(new Post(crmPost_postId));
+        staffService.saveOrUpdate(getModel());
+        return SUCCESS;
+    }
+
+    public String editStaffPre(){
+        deptList =departmentService.findAll();
+        staffById = staffService.findStaffById(getModel().getStaffId());
+        System.out.println(staffById);
         return SUCCESS;
     }
 
 
 
 
+
+    public List<Department> getDeptList() {
+        return deptList;
+    }
+
+    public void setDeptList(List<Department> deptList) {
+        this.deptList = deptList;
+    }
 
     public String getLoginName() {
         return loginName;
@@ -85,5 +124,21 @@ public class StaffAction extends BaseAction<Staff, StaffServiceImpl> {
 
     public String getStaffId() {
         return staffId;
+    }
+
+    public String getCrmPost_postId() {
+        return crmPost_postId;
+    }
+
+    public void setCrmPost_postId(String crmPost_postId) {
+        this.crmPost_postId = crmPost_postId;
+    }
+
+    public Staff getStaffById() {
+        return staffById;
+    }
+
+    public void setStaffById(Staff staffById) {
+        this.staffById = staffById;
     }
 }

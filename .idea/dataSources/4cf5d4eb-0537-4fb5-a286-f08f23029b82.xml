@@ -63,8 +63,7 @@
     </foreign-key>
     <column id="33" parent="23" name="STAFF_ID">
       <mandatory>1</mandatory>
-      <data-type>int(11)|0</data-type>
-      <sequence-identity>1</sequence-identity>
+      <data-type>varchar(255)|0</data-type>
     </column>
     <column id="34" parent="23" name="staffName">
       <data-type>varchar(255)|0</data-type>

@@ -23,6 +23,8 @@ public interface StaffDao extends BaseDao<Staff> {
     @Override
     List<Staff> findAll();
 
+    Staff findStaffById(String staffId);
+
     @Override
     Staff findById(Serializable id);
 

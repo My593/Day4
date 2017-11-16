@@ -26,6 +26,11 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
+    public Staff findStaffById(String staffId) {
+
+        return staffDao.findStaffById(staffId);
+    }
+    @Override
     public boolean delete(Staff staff) {
         staffDao.delete(staff);
         return true;
@@ -38,6 +43,7 @@ public class StaffServiceImpl implements StaffService {
 
     @Override
     public Staff findById(Serializable id) {
+
         return null;
     }
 
@@ -48,6 +54,7 @@ public class StaffServiceImpl implements StaffService {
 
     @Override
     public boolean saveOrUpdate(Staff staff) {
+        staffDao.saveOrUpdate(staff);
         return true;
     }
 
@@ -60,10 +67,6 @@ public class StaffServiceImpl implements StaffService {
     public int getTotalrecord(String condition, Object[] params) {
         return 0;
     }
-
-
-
-
 
 
 

@@ -5,7 +5,7 @@
         <hibernate-mapping package="com.lanou.staff.domain">
     <class name="Staff" table="T_STAFF">
         <id name="staffId" column="STAFF_ID">
-            <generator class="native"/>
+            <generator class="uuid"/>
         </id>
         <property name="staffName"/>
         <property name="loginName"/>
@@ -16,6 +16,7 @@
         <many-to-one name="post"
                      class="com.lanou.post.domain.Post"
                      column="POST_ID"
-                     lazy="false"/>
+                     lazy="false"
+        />
     </class>
 </hibernate-mapping>

@@ -18,4 +18,7 @@ public interface PostDao extends BaseDao<Post> {
 
     @Override
     boolean saveOrUpdate(Post post);
+
+    List<Post> getPostByDeptId(String deptId);
+
 }

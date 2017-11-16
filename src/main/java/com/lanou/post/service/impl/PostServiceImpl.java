@@ -49,6 +49,11 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public List<Post> getPostByDeptId(String deptId) {
+        return postDao.getPostByDeptId(deptId);
+    }
+
+    @Override
     public boolean delete(Post post) {
         return false;
     }

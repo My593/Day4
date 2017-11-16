@@ -38,4 +38,6 @@ public interface StaffService extends BaseDao<Staff> {
     @Override
     int getTotalrecord(String condition, Object[] params);
 
+    Staff findStaffById(String staffId);
+
 }

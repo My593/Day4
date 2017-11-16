@@ -17,8 +17,8 @@ public class Post {
     public Post() {
     }
 
-    public Post(String postName) {
-        this.postName = postName;
+    public Post(String postId) {
+        this.postId = postId;
     }
 
     public String getPostId() {

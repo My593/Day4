@@ -4,6 +4,8 @@ import com.lanou.base.BaseAction;
 import com.lanou.department.domain.Department;
 import com.lanou.department.service.DepartmentService;
 import com.lanou.department.service.impl.DepartmentServiceImpl;
+import com.lanou.staff.domain.Staff;
+import com.opensymphony.xwork2.ActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -23,9 +25,21 @@ public class DepartmentAction extends BaseAction<Department,DepartmentServiceImp
 
     @Resource
     private DepartmentService departmentService;
+    private List<Staff> staffList;
 
     public String findAllDepartment(){
-        allList = departmentService.findAll();
+
+        staffList = (List<Staff>) ActionContext.getContext().getSession().get("allList");
+        this.allList = departmentService.findAll();
+
+        return SUCCESS;
+    }
+
+    public String findAllDep(){
+
+        staffList = (List<Staff>) ActionContext.getContext().getSession().get("allList");
+        this.allList = departmentService.findAll();
+
         return SUCCESS;
     }
 
@@ -52,4 +66,11 @@ public class DepartmentAction extends BaseAction<Department,DepartmentServiceImp
         this.allList = allList;
     }
 
+    public List<Staff> getStaffList() {
+        return staffList;
+    }
+
+    public void setStaffList(List<Staff> staffList) {
+        this.staffList = staffList;
+    }
 }

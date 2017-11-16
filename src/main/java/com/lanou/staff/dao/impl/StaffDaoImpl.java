@@ -32,8 +32,7 @@ public class StaffDaoImpl extends HibernateDaoSupport implements StaffDao {
 
     @Override
     public boolean delete(Staff staff) {
-        staff.setStaffId(1);
-        getHibernateTemplate().delete(staff);
+
         return true;
     }
 
@@ -44,7 +43,16 @@ public class StaffDaoImpl extends HibernateDaoSupport implements StaffDao {
     }
 
     @Override
+    public Staff findStaffById(String staffId) {
+
+        Staff staff = getHibernateTemplate().get(Staff.class, staffId);
+
+        return staff;
+    }
+
+    @Override
     public Staff findById(Serializable id) {
+
         getHibernateTemplate().find("from Staff T_STAFF where staffId = ?");
         return null;
     }
@@ -56,12 +64,14 @@ public class StaffDaoImpl extends HibernateDaoSupport implements StaffDao {
 
     @Override
     public boolean saveOrUpdate(Staff staff) {
+
+        getHibernateTemplate().saveOrUpdate(staff);
+
         return true;
     }
 
     @Override
     public List<Staff> findAll(String condition, Object... params) {
-//        List<?> staffList =  getHibernateTemplate().find(condition, params);
         return null;
     }
 
