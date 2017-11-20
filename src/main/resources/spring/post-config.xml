@@ -15,4 +15,12 @@
     </bean>
 
 
+    <bean id="postAction" class="com.lanou.post.action.PostAction" scope="prototype">
+        <property name="service" ref="postService"/>
+        <property name="departmentService" ref="deptService"/>
+    </bean>
+
+
+
+
 </beans>

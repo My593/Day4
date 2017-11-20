@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
 
 
     <context:component-scan base-package="com.lanou"/>
@@ -25,18 +33,6 @@
         <property name="configLocation" value="classpath:hibernate.cfg.xml"/>
 
     </bean>
-
-    <bean id="staffDao" class="com.lanou.staff.dao.impl.StaffDaoImpl">
-
-        <!--为继承来的SessionFactory属性赋值-->
-        <property name="sessionFactory" ref="sessionFactory"/>
-
-    </bean>
-
-    <bean id="staffService" class="com.lanou.staff.service.impl.StaffServiceImpl">
-        <property name="staffDao" ref="staffDao"/>
-    </bean>
-
     <!--创建事务管理器-->
     <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory"/>
@@ -60,4 +56,21 @@
         <aop:advisor advice-ref="staffAdvisor" pointcut-ref="staffPointCut"/>
 
     </aop:config>
+
+    <bean id="staffDao" class="com.lanou.staff.dao.impl.StaffDaoImpl">
+
+        <!--为继承来的SessionFactory属性赋值-->
+        <property name="sessionFactory" ref="sessionFactory"/>
+
+    </bean>
+
+    <bean id="staffService" class="com.lanou.staff.service.impl.StaffServiceImpl">
+        <property name="staffDao" ref="staffDao"/>
+    </bean>
+
+    <bean id="staffAction" class="com.lanou.staff.action.StaffAction" scope="prototype">
+        <property name="service" ref="staffService"/>
+        <property name="departmentService" ref="deptService"/>
+        <property name="postService" ref="postService"/>
+    </bean>
 </beans>

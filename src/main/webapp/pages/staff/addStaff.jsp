@@ -16,7 +16,7 @@
 
             var data = new FormData();
             console.log(value);
-            data.append("post_dept_id", value);
+            data.append("post.dept.deptId", value);
 
             var xhr = new XMLHttpRequest();
             xhr.withCredentials = true;
@@ -108,11 +108,11 @@
         <tr>
             <td width="10%">所属部门：</td>
             <td width="20%">
-                <select name="post_dept_id" onchange="changePost(this.value)">
+                <select name="post.dept.deptId" onchange="changePost(this.value)">
                     <option value="">--请选择部门--</option>
 
-                    <s:iterator value="allList" var="dept">
-                    <option value="${dept.deptId}">${dept.deptName}</option>
+                    <s:iterator value="deptList" var="deptd">
+                    <option value="${deptd.deptId}">${deptd.deptName}</option>
 
                     </s:iterator>
                     </select>
@@ -120,7 +120,7 @@
             </td>
             <td width="8%">职务：</td>
             <td width="62%">
-                <select id="postSelectId" name="crmPost_postId">
+                <select name="post.postId" id="postSelectId">
                     <option>----请--选--择----</option>
                 </select>
             </td>

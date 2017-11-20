@@ -1,10 +1,13 @@
 package com.lanou.staff.dao.impl;
 
+import com.lanou.post.domain.Post;
 import com.lanou.staff.dao.StaffDao;
 import com.lanou.staff.domain.Staff;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,7 +30,18 @@ public class StaffDaoImpl extends HibernateDaoSupport implements StaffDao {
 
     @Override
     public void save(Staff staff) {
+//        if (staff.getStaffId().isEmpty()){
         getHibernateTemplate().save(staff);
+//        }
+//        getHibernateTemplate().saveOrUpdate(staff);
+    }
+
+    @Override
+    public boolean saveOrUpdate(Staff staff) {
+
+        getHibernateTemplate().saveOrUpdate(staff);
+
+        return true;
     }
 
     @Override
@@ -62,13 +76,6 @@ public class StaffDaoImpl extends HibernateDaoSupport implements StaffDao {
         return true;
     }
 
-    @Override
-    public boolean saveOrUpdate(Staff staff) {
-
-        getHibernateTemplate().saveOrUpdate(staff);
-
-        return true;
-    }
 
     @Override
     public List<Staff> findAll(String condition, Object... params) {
@@ -80,4 +87,52 @@ public class StaffDaoImpl extends HibernateDaoSupport implements StaffDao {
         getHibernateTemplate().find(condition, params);
         return 0;
     }
+
+    @Override
+    public List<Staff> findCondition(Staff staff) {
+
+        List<Staff> list = new ArrayList<>();
+        boolean deptId = StringUtils.isBlank(staff.getPost().getDept().getDeptId());
+        boolean postId = StringUtils.isBlank(staff.getPost().getPostId());
+        boolean staffName = StringUtils.isBlank(staff.getStaffName());
+        //根据部门查询
+        if (!deptId && postId && staffName) {
+            List<Post> posts = (List<Post>) getHibernateTemplate().find("from Post where dept.deptId = ?", staff.getPost().getDept().getDeptId());
+
+            for (int i = 0; i < posts.size(); i++) {
+                List<Staff> staffs =
+                        (List<Staff>) getHibernateTemplate().
+                                find("from Staff where post.postId = ?", posts.get(i).getPostId());
+                list.addAll(staffs);
+            }
+            return list;
+            //根据职务查询
+        } else if (!postId && staffName) {
+            return (List<Staff>) getHibernateTemplate().find("from Staff where post.postId = ?", staff.getPost().getPostId());
+
+            //根据名字查询
+        } else if (deptId && !staffName) {
+            return (List<Staff>) getHibernateTemplate().find("from Staff where staffName like ?", "%" + staff.getStaffName() + "%");
+
+            //根据职务和名字查询
+
+        } else if (!postId && !staffName) {
+            return (List<Staff>) getHibernateTemplate().find("from Staff where post.postId = ? and staffName like ?", staff.getPost().getPostId(), "%" + staff.getStaffName() + "%");
+
+            //根据部门和名字查询
+        } else if (!deptId && postId && !staffName) {
+            List<Post> posts = (List<Post>) getHibernateTemplate().find("from Post where dept.deptId = ?", staff.getPost().getDept().getDeptId());
+            for (int i = 0; i < posts.size(); i++) {
+                List<Staff> staffs = (List<Staff>) getHibernateTemplate().find("from Staff where post.postId = ? and staffName like ?", posts.get(i).getPostId(), "%" + staff.getStaffName() + "%");
+                list.addAll(staffs);
+            }
+            return list;
+        } else {
+            return (List<Staff>) getHibernateTemplate().find("from Staff");
+
+        }
+
+    }
+
+
 }

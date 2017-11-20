@@ -4,7 +4,6 @@ import com.lanou.staff.dao.StaffDao;
 import com.lanou.staff.domain.Staff;
 import com.lanou.staff.service.StaffService;
 
-import javax.annotation.Resource;
 import java.io.Serializable;
 import java.util.List;
 
@@ -12,7 +11,7 @@ import java.util.List;
  * Created by dllo on 17/11/9.
  */
 public class StaffServiceImpl implements StaffService {
-    @Resource
+
     private StaffDao staffDao;
 
     @Override
@@ -30,9 +29,16 @@ public class StaffServiceImpl implements StaffService {
 
         return staffDao.findStaffById(staffId);
     }
+
+    @Override
+    public List<Staff> findCondition(Staff staff) {
+
+         return staffDao.findCondition(staff);
+    }
+
+
     @Override
     public boolean delete(Staff staff) {
-        staffDao.delete(staff);
         return true;
     }
 

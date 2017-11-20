@@ -9,7 +9,11 @@
 
     </bean>
 
-    <bean id="departmentService" class="com.lanou.department.service.impl.DepartmentServiceImpl">
+    <bean id="deptService" class="com.lanou.department.service.impl.DepartmentServiceImpl">
         <property name="departmentDao" ref="departmentDao"/>
+    </bean>
+
+    <bean id="deptAction" class="com.lanou.department.action.DepartmentAction" scope="prototype">
+        <property name="service" ref="deptService"/>
     </bean>
 </beans>

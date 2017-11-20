@@ -7,6 +7,36 @@
 <struts>
     <constant name="struts.objectFactory" value="spring"/>
 
+    <package name="interceptor" extends="json-default">
+        <interceptors>
+            <!--
+            当单独指定自定义的拦截器的时候 系统中默认的所有的拦截器都会失效
+            解决办法 :新建拦截器栈,把自己创建的拦截器和系统的拦截器栈都加入到新建拦截器栈中-->
+            <interceptor name="loginInterceptor" class="com.lanou.interceptor.LoginInterceptor">
+                <!--拦截的方法-->
+                <param name="excludeMethods">login,staffAction_logout</param>
+            </interceptor>
+
+            <interceptor-stack name="myInterceptorStack">
+                <!--将新建的拦截器加入到新栈-->
+                <interceptor-ref name="loginInterceptor"/>
+                <interceptor-ref name="defaultStack"/>
+            </interceptor-stack>
+
+        </interceptors>
+
+        <default-interceptor-ref name="myInterceptorStack"/>
+
+        <global-results>
+            <result name="login">/pages/login.jsp</result>
+            <!--<result name="input">/index.jsp</result>-->
+            <!--<result name="error">/pages/error.jsp</result>-->
+        </global-results>
+
+    </package>
+
+
+
     <include file="struts/Staff.xml"/>
     <include file="struts/Department.xml"/>
     <include file="struts/Post.xml"/>

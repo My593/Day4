@@ -4,26 +4,21 @@ import com.lanou.base.BaseAction;
 import com.lanou.department.domain.Department;
 import com.lanou.department.service.DepartmentService;
 import com.lanou.post.domain.Post;
+import com.lanou.post.service.PostService;
 import com.lanou.staff.domain.Staff;
 import com.lanou.staff.service.StaffService;
-import com.lanou.staff.service.impl.StaffServiceImpl;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Controller;
+import com.opensymphony.xwork2.ActionContext;
+import org.apache.commons.lang3.StringUtils;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
  * Created by dllo on 17/11/9.
  */
-@Controller("staffAction")
-@Scope("prototype")
-public class StaffAction extends BaseAction<Staff, StaffServiceImpl> {
+public class StaffAction extends BaseAction<Staff, StaffService> {
 
     private String loginName, loginPwd;
-    @Resource
-    private StaffService staffService;
-    @Resource
+
     private DepartmentService departmentService;
 
     private List<Staff> allList;
@@ -32,14 +27,20 @@ public class StaffAction extends BaseAction<Staff, StaffServiceImpl> {
 
     private List<Department> deptList;
 
-    private String crmPost_postId;
-    private Staff staff;
-    private Staff staffById;
+    private String postId;
 
+    private Staff staffById;
+    private String deptId;
+
+    private PostService postService;
+    private List<Post> postByDeptId;
+
+    private List<Post> postList;
 
 
     public String login() {
-        boolean result = staffService.login(getModel());
+
+        boolean result = service.login(getModel());
         if (result == true) {
             sessionPut("login", getModel().getLoginName());
             return SUCCESS;
@@ -50,36 +51,71 @@ public class StaffAction extends BaseAction<Staff, StaffServiceImpl> {
 
     }
 
-
-    public String findAllStaff() {
-        allList = staffService.findAll();
-        sessionPut("allList",allList);
-
+    public String validateLogin() {
+        if (StringUtils.isBlank(getModel().getLoginName())){
+            addFieldError("loginName","请输入用户名");
+            return INPUT;
+        }
+        if (StringUtils.isBlank(getModel().getLoginPwd())){
+            addFieldError("loginPwd","请输入密码");
+            return INPUT;
+        }
         return SUCCESS;
     }
 
-    public String addStaff(){
+    public String findAllStaff() {
+        allList = service.findAll();
+        return SUCCESS;
+    }
 
-        staff = getModel();
-        staff.setPost(new Post(crmPost_postId));
-        staffService.save(getModel());
+    public String findDept(){
+        deptList = departmentService.findAll();
+        return SUCCESS;
+    }
+
+    public String addStaff() {
+        service.save(getModel());
+
         System.out.println(getModel());
         return SUCCESS;
     }
 
-    public String update(){
-
-        getModel().setPost(new Post(crmPost_postId));
-        staffService.saveOrUpdate(getModel());
+    public String update() {
+        System.out.println(getModel());
+        System.out.println(getModel().getStaffName());
+        service.saveOrUpdate(getModel());
         return SUCCESS;
     }
 
-    public String editStaffPre(){
-        deptList =departmentService.findAll();
-        staffById = staffService.findStaffById(getModel().getStaffId());
+    public String editStaffPre() {
+        deptList = departmentService.findAll();
+        staffById = service.findStaffById(getModel().getStaffId());
+        ActionContext.getContext().put("setDeptId", staffById.getPost().getDept().getDeptId());
+        ActionContext.getContext().getSession().put("setPostId", staffById.getPost().getPostId());
+        ActionContext.getContext().getSession().put("setPostName", staffById.getPost().getPostName());
         System.out.println(staffById);
         return SUCCESS;
     }
+
+    public String getPostsByDeptId() {
+        postByDeptId = postService.getPostByDeptId(getModel().getPost().getDept().getDeptId());
+        return SUCCESS;
+    }
+
+    public String staffAction_findAll(){
+        deptList = departmentService.findAll();
+        postList = postService.findAll();
+        allList = service.findCondition(getModel());
+        System.out.println(allList);
+        return SUCCESS;
+    }
+
+    public String staffAction_logout(){
+        ActionContext.getContext().getSession().remove("login");
+        return SUCCESS;
+    }
+
+
 
 
 
@@ -109,6 +145,13 @@ public class StaffAction extends BaseAction<Staff, StaffServiceImpl> {
         this.loginPwd = loginPwd;
     }
 
+    public void setPostByDeptId(List<Post> postByDeptId) {
+        this.postByDeptId = postByDeptId;
+    }
+
+    public List<Post> getPostByDeptId() {
+        return postByDeptId;
+    }
 
     public List<Staff> getAllList() {
         return allList;
@@ -126,12 +169,12 @@ public class StaffAction extends BaseAction<Staff, StaffServiceImpl> {
         return staffId;
     }
 
-    public String getCrmPost_postId() {
-        return crmPost_postId;
+    public String getPostId() {
+        return postId;
     }
 
-    public void setCrmPost_postId(String crmPost_postId) {
-        this.crmPost_postId = crmPost_postId;
+    public void setPostId(String postId) {
+        this.postId = postId;
     }
 
     public Staff getStaffById() {
@@ -141,4 +184,29 @@ public class StaffAction extends BaseAction<Staff, StaffServiceImpl> {
     public void setStaffById(Staff staffById) {
         this.staffById = staffById;
     }
+
+    public String getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(String deptId) {
+        this.deptId = deptId;
+    }
+
+    public void setDepartmentService(DepartmentService departmentService) {
+        this.departmentService = departmentService;
+    }
+
+    public void setPostService(PostService postService) {
+        this.postService = postService;
+    }
+
+    public List<Post> getPostList() {
+        return postList;
+    }
+
+    public void setPostList(List<Post> postList) {
+        this.postList = postList;
+    }
 }
+

@@ -12,19 +12,19 @@
 
 
         <action name="findAllStaff" class="staffAction" method="findAllStaff">
-            <result name="success" type="redirectAction">findDepartment</result>
+            <result name="success" type="chain">findDepartment</result>
             <!--<result name="input">/pages/error.jsp</result>-->
         </action>
 
-        <action name="findDepartment" class="com.lanou.department.action.DepartmentAction" method="findAllDepartment">
+        <action name="findDepartment" class="staffAction" method="findDept">
             <result name="success">/pages/staff/listStaff.jsp</result>
         </action>
 
-        <action name="findDept" class="deptAction" method="findAllDepartment">
+        <action name="findDept" class="staffAction" method="findDept">
             <result name="success">/pages/staff/addStaff.jsp</result>
         </action>
 
-        <action name="findDep" class="deptAction" method="findAllDep">
+        <action name="findDep" class="staffAction" method="findDept">
             <result name="success">/pages/staff/editStaff.jsp</result>
         </action>
 
@@ -33,6 +33,7 @@
         <action name="addStaff" class="staffAction" method="addStaff">
             <result name="success" type="redirectAction">findAllStaff</result>
         </action>
+
 
 
         <action name="editStaffPre" class="staffAction" method="editStaffPre">
@@ -44,10 +45,19 @@
         </action>
 
 
+        <action name="staffAction_findAll" class="staffAction" method="staffAction_findAll">
+            <result name="success">/pages/staff/listStaff.jsp</result>
+        </action>
 
-        <action name="staff_list" class="com.lanou.post.action.PostAction" method="getPostByDeptId">
+        <action name="staffAction_logout" class="staffAction" method="staffAction_logout">
+            <result name="success">/pages/login.jsp</result>
+        </action>
+
+
+
+        <action name="staff_list" class="staffAction" method="getPostsByDeptId">
             <result name="success" type="json">
-                <param name="root">postList</param>
+                <param name="root">postByDeptId</param>
                 <param name="includeProperties">\[\d\]\.postName,\[\d\]\.postId</param>
             </result>
         </action>

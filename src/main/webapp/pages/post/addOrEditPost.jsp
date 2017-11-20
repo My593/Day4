@@ -42,6 +42,7 @@
 	    <td>
             <select name="dept.deptId">
                 <option value="">----请--选--择----</option>
+                
                 <s:iterator value="deptList" var="department">
                     <s:if test="#department.deptId==model.dept.deptId">
                     <option value="${department.deptId}" selected="selected">${department.deptName}</option>

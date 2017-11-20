@@ -5,34 +5,27 @@ import com.lanou.department.domain.Department;
 import com.lanou.department.service.DepartmentService;
 import com.lanou.post.domain.Post;
 import com.lanou.post.service.PostService;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Controller;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
  * Created by dllo on 17/11/13.
  */
-@Controller("postAction")
-@Scope("prototype")
+
 public class PostAction extends BaseAction<Post, PostService> {
+
+    private DepartmentService departmentService;
 
     private List<Post> allList;
 
     private List<Department> deptList;
-
-    @Resource
-    private DepartmentService departmentService;
-    @Resource
-    private PostService postService;
 
     private List<Post> postList;
     private String post_dept_id;
 
     // 查询所有
     public String findAllPost() {
-        allList = postService.findAll();
+        allList = service.findAll();
         return SUCCESS;
     }
 
@@ -43,7 +36,7 @@ public class PostAction extends BaseAction<Post, PostService> {
     }
 
     public String savePost() {
-        postService.saveOrUpdate(getModel());
+        service.saveOrUpdate(getModel());
         return SUCCESS;
     }
 
@@ -55,18 +48,20 @@ public class PostAction extends BaseAction<Post, PostService> {
     }
 
 
-    public String getPostByDeptId() {
-        System.out.println("000000000000000000"+post_dept_id);
 
-        postList = postService.getPostByDeptId(post_dept_id);
-        return SUCCESS;
-    }
+
+
+
+
+
+
+
+
 
 
     public List<Post> getAllList() {
         return allList;
     }
-
     public void setAllList(List<Post> allList) {
         this.allList = allList;
     }
@@ -94,5 +89,14 @@ public class PostAction extends BaseAction<Post, PostService> {
 
     public void setPostList(List<Post> postList) {
         this.postList = postList;
+    }
+
+
+    public DepartmentService getDepartmentService() {
+        return departmentService;
+    }
+
+    public void setDepartmentService(DepartmentService departmentService) {
+        this.departmentService = departmentService;
     }
 }

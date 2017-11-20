@@ -42,7 +42,6 @@
     <facet type="Spring" name="Spring">
       <configuration>
         <fileset id="fileset" name="Spring Application Context" removed="false">
-          <file>file://$MODULE_DIR$/src/main/resources/spring-config.xml</file>
           <file>file://$MODULE_DIR$/src/main/resources/spring/dept-config.xml</file>
           <file>file://$MODULE_DIR$/src/main/resources/spring/post-config.xml</file>
           <file>file://$MODULE_DIR$/src/main/resources/spring/spring-config.xml</file>

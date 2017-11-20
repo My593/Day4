@@ -4,7 +4,6 @@ import com.lanou.post.dao.PostDao;
 import com.lanou.post.domain.Post;
 import com.lanou.post.service.PostService;
 
-import javax.annotation.Resource;
 import java.io.Serializable;
 import java.util.List;
 
@@ -13,7 +12,7 @@ import java.util.List;
  */
 public class PostServiceImpl implements PostService {
 
-    @Resource
+
     private PostDao postDao;
     @Override
     public void save(Post post) {

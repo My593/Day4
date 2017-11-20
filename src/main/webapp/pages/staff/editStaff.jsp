@@ -10,14 +10,11 @@
     <script>
 
         function changePost(value) {
-
             var data = new FormData();
             console.log(value);
-            data.append("post_dept_id", value);
-
+            data.append("post.dept.deptId", value);
             var xhr = new XMLHttpRequest();
             xhr.withCredentials = true;
-
             xhr.addEventListener("readystatechange", function () {
                 if (this.readyState === 4) {
                     console.log(this.responseText);
@@ -112,21 +109,23 @@
 	 <tr>
 	    <td width="10%">所属部门：</td>
 	    <td width="20%">
-	    	<select name="post_dept_id"  onchange="changePost(this.value)">
+	    	<select name="post.dept.deptId"  onchange="changePost(this.value)">
 			    <option value="">----请--选--择----</option>
-
                 <s:iterator value="deptList" var="deptss">
-                    <option value="${deptss.deptId}">${deptss.deptName}</option>
-
+					<s:if test="%{#deptss.deptId.equals(#setDeptId)}">
+						<option value="${deptss.deptId}" selected = "selected">${deptss.deptName}</option>
+					</s:if>
+					<s:else>
+						<option value="${deptss.deptId}">${deptss.deptName}</option>
+					</s:else>
                 </s:iterator>
-
 			</select>
 
 	    </td>
 	    <td width="8%">职务：</td>
 	    <td width="62%">
-	    	<select name="crmPost_postId" id="postSelectId">
-			    <option value="">----请--选--择----</option>
+	    	<select name="post.postId" id="postSelectId">
+				<option value="${sessionScope.get("setPostId")}">${sessionScope.get("setPostName")}</option>
 
 			</select>
 	    </td>

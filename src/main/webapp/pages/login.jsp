@@ -41,10 +41,14 @@ FONT-SIZE: 12px; COLOR: #4b4b4b; LINE-HEIGHT: 18px; TEXT-DECORATION: none
 		 
 			<td class="login_msg" width="400">
 				<form action="/staff/staffAction_login.action" method="post">
-					
+
+
 					<font size="6" color="#ffffff">
 						欢迎使用CRM系统
-					</font> 
+					</font>
+					<font color="#ff0000">
+						<s:property value="#session.msg"/>
+					</font>
 					<br/>
 					<br/>
 
@@ -62,6 +66,7 @@ FONT-SIZE: 12px; COLOR: #4b4b4b; LINE-HEIGHT: 18px; TEXT-DECORATION: none
 					</font>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<input type="submit" class="btn" value="登录 " />
+
 					<font color="#ff0000">
 						<s:fielderror fieldName="msg" theme="simple"/>
 						<%--<s:actionerror name="msg"/>--%>

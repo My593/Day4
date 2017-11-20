@@ -40,4 +40,4 @@ public interface StaffService extends BaseDao<Staff> {
 
     Staff findStaffById(String staffId);
 
-}
+    List<Staff> findCondition(Staff staff);}

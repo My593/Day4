@@ -15,7 +15,7 @@
 
             var data = new FormData();
             console.log(value);
-            data.append("post_dept_id", value);
+            data.append("post.dept.deptId", value);
 
             var xhr = new XMLHttpRequest();
             xhr.withCredentials = true;
@@ -34,7 +34,7 @@
                     for (var i = 0; i < length; i++) {
                         serverSelect.removeChild(optionEle[0])
                     }
-                    serverSelect.innerHTML = "<option value = '-1'>--选择服务器--</option>";
+                    serverSelect.innerHTML = "<option value = ''>--选择职务--</option>";
 
 
                     // 将json数据插入到option中
@@ -61,6 +61,16 @@
 
 
         }
+
+        function condition() {
+
+            document.getElementById("getStaffs").submit();
+
+
+        }
+
+
+
 
     </script>
 </head>
@@ -93,15 +103,15 @@
 </table>
 
 <!-- 查询条件：马上查询 -->
-<form action="staffAction_findAll" method="post">
+<form action="staffAction_findAll" method="post" id="getStaffs">
     <table width="88%" border="0" style="margin: 20px;">
         <tr>
             <td width="80px">部门：</td>
             <td width="200px">
 
-                <select name="post_dept_id" onchange="changePost(this.value)">
+                <select name="post.dept.deptId" onchange="changePost(this.value)">
                     <option value="">--请选择部门--</option>
-                    <s:iterator value="allList" var="dept">
+                    <s:iterator value="deptList" var="dept">
                         <option value="${dept.deptId}">${dept.deptName}</option>
 
                     </s:iterator>
@@ -111,10 +121,8 @@
             </td>
             <td width="80px">职务：</td>
             <td width="200px">
-
-                <select name="crmPost_postId" id="postSelectId">
+                <select name="post.postId" id="postSelectId">
                     <option value="">--请选择职务--</option>
-
                 </select>
 
             </td>
@@ -143,7 +151,7 @@
         <td width="10%" align="center">编辑</td>
     </tr>
 
-    <s:iterator value="staffList" var="staff">
+    <s:iterator value="allList" var="staff">
 
     <tr class="<s:property value="#sl.even ? 'tabtd2':'table1'" />">
         <td align="center"><s:property value="staffName"/></td>

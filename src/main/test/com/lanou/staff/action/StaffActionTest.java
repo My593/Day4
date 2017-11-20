@@ -1,5 +1,6 @@
 package com.lanou.staff.action;
 
+import com.lanou.staff.domain.Staff;
 import com.lanou.staff.service.StaffService;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,8 +23,8 @@ public class StaffActionTest {
 
     @Test
     public void test(){
+        staffService.save(new Staff("po","po","po","po","po"));
 
-        System.out.println(staffService.findAll());
     }
 
 
