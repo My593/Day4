@@ -17,7 +17,6 @@ public class LoginInterceptor extends MethodFilterInterceptor {
             ServletActionContext.getContext().getSession().put("msg","未登录状态");
             return "login";
         }
-
         return invocation.invoke();
     }
 }

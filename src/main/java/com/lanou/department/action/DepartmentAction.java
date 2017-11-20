@@ -26,6 +26,7 @@ public class DepartmentAction extends BaseAction<Department,DepartmentService> {
 
 
     public String addDept(){
+        if (getModel() != null)
         service.save(getModel());
 
         return SUCCESS;

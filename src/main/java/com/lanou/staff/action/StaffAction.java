@@ -74,8 +74,8 @@ public class StaffAction extends BaseAction<Staff, StaffService> {
     }
 
     public String addStaff() {
-        service.save(getModel());
 
+        service.save(getModel());
         System.out.println(getModel());
         return SUCCESS;
     }
@@ -111,7 +111,7 @@ public class StaffAction extends BaseAction<Staff, StaffService> {
     }
 
     public String staffAction_logout(){
-        ActionContext.getContext().getSession().remove("login");
+        ActionContext.getContext().getSession().clear();
         return SUCCESS;
     }
 

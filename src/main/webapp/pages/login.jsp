@@ -46,6 +46,7 @@ FONT-SIZE: 12px; COLOR: #4b4b4b; LINE-HEIGHT: 18px; TEXT-DECORATION: none
 					<font size="6" color="#ffffff">
 						欢迎使用CRM系统
 					</font>
+					<br/>
 					<font color="#ff0000">
 						<s:property value="#session.msg"/>
 					</font>

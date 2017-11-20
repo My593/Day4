@@ -3,7 +3,7 @@
         "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
         "http://struts.apache.org/dtds/struts-2.5.dtd">
 <struts>
-    <package name="login" extends="json-default" namespace="/staff">
+    <package name="login" extends="interceptor" namespace="/staff">
 
         <action name="staffAction_login" class="staffAction" method="login">
             <result name="success">/pages/frame.jsp</result>

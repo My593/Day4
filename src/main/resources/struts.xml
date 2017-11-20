@@ -14,7 +14,7 @@
             解决办法 :新建拦截器栈,把自己创建的拦截器和系统的拦截器栈都加入到新建拦截器栈中-->
             <interceptor name="loginInterceptor" class="com.lanou.interceptor.LoginInterceptor">
                 <!--拦截的方法-->
-                <param name="excludeMethods">login,staffAction_logout</param>
+                <param name="excludeMethods">login</param>
             </interceptor>
 
             <interceptor-stack name="myInterceptorStack">
